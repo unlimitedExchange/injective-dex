@@ -9,7 +9,11 @@ import {
   DerivativeTransformer
 } from '@injectivelabs/derivatives-consumer'
 import { AccountAddress, TradeExecutionSide } from '@injectivelabs/ts-types'
-import { BigNumberInBase, BigNumberInWei } from '@injectivelabs/utils'
+import {
+  BigNumber,
+  BigNumberInBase,
+  BigNumberInWei
+} from '@injectivelabs/utils'
 import { Web3Exception } from '@injectivelabs/exceptions'
 import { SubaccountStreamType } from '@injectivelabs/subaccount-consumer'
 import {
@@ -710,6 +714,37 @@ export const calculateMargin = ({
   leverage: string
 }): BigNumberInBase => {
   return new BigNumberInBase(quantity).times(price).dividedBy(leverage)
+}
+
+export const getAggregationPrice = ({
+  price,
+  aggregation,
+  isBuy
+}: {
+  price: BigNumberInBase
+  aggregation: number
+  isBuy: boolean
+}): BigNumberInBase => {
+  const aggregateBy = new BigNumberInBase(10 ** Math.abs(aggregation))
+  if (aggregation < 0) {
+    // handles 10, 100 and 1000
+    return new BigNumberInBase(
+      price
+        .dividedBy(aggregateBy)
+        .integerValue(isBuy ? BigNumber.ROUND_FLOOR : BigNumber.ROUND_CEIL)
+        .multipliedBy(aggregateBy)
+    )
+  }
+
+  return new BigNumberInBase(
+    price
+      .decimalPlaces(
+        aggregation,
+        isBuy ? BigNumber.ROUND_FLOOR : BigNumber.ROUND_CEIL
+      )
+      .multipliedBy(aggregateBy)
+      .dividedBy(aggregateBy)
+  )
 }
 
 export const getPositionFeeAdjustedBankruptcyPrice = ({

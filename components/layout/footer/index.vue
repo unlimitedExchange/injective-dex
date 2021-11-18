@@ -17,7 +17,7 @@
           {{ $t('fee_discounts_footer') }}
         </nuxt-link>
       </item>
-      <item v-if="false" class="text-footer">
+      <item class="text-footer">
         <nuxt-link class="cursor-pointer" :to="{ name: 'faq' }">
           {{ $t('faq') }}
         </nuxt-link>
