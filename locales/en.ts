@@ -288,7 +288,7 @@ export default {
   Cancel: 'Cancel',
   Close: 'Close',
   open_positions: 'Open Positions',
-  getting_started: 'Getting Started',
+  getting_started: 'Why choose Unlimited Exchange?',
   perp: 'Perp',
   futures: 'Futures',
   perpetuals: 'Perpetuals',
@@ -357,7 +357,7 @@ export default {
     "The time at which the trade was executed (times are shown in your browser's timezone).",
   recent_news: 'Recent news',
   injective_home_title_1: 'Injective eliminates all barriers to trading',
-  injective_home_title_2: 'Join a global community',
+  injective_home_title_2: 'Join our community',
   injective_home_subtitle_1:
     'Access unlimited DeFi markets. With Injective, you can trade any financial market on the first fast, cross-chain, low fee, secure, and fully decentralized derivatives exchange protocol. ',
   injective_home_subtitle_2:

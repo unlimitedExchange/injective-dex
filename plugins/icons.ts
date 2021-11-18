@@ -40,7 +40,9 @@ import Reddit from '~/components/icons/reddit.vue'
 import Discord from '~/components/icons/discord.vue'
 import Telegram from '~/components/icons/telegram.vue'
 import Youtube from '~/components/icons/youtube.vue'
+import Github from '~/components/icons/github.vue'
 
+Vue.component('VIconGithub', Github)
 Vue.component('VIconTwitter', Twitter)
 Vue.component('VIconYoutube', Youtube)
 Vue.component('VIconDiscord', Discord)

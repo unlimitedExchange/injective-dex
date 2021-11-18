@@ -19,7 +19,7 @@ export const uniqueId = (characters: number = 6): string =>
   ).toString(characters)
 
 export const headTitle =
-  'Injective Exchange - DeFi DEX | Decentralized Derivatives Trading. Any Market. Anytime. Anywhere.'
+  'Unlimited Exchange - DeFi DEX | Decentralized Derivatives Trading. Any Market. Anytime. Anywhere.'
 
 export const metaTags = (): {
   appMetaTags: () => Object[]
@@ -27,11 +27,11 @@ export const metaTags = (): {
   manifestMetaTags: () => Object
 } => {
   const title =
-    'Injective Protocol - Decentralized Derivatives Trading. Any Market. Anytime. Anywhere.'
+    'Unlimited Exchange - Decentralized Derivatives Trading. Any Market. Anytime. Anywhere.'
   const description =
-    'Injective is the first front-running resistant, layer-2 exchange protocol that unlocks the full potential of borderless finance by supporting margin trading, derivatives, and futures.'
+    'Unlimited Exchange, powered by Injective. Injective is the first front-running resistant, layer-2 exchange protocol that unlocks the full potential of borderless finance by supporting margin trading, derivatives, and futures.'
   const keywords =
-    'injective protocol, dapp, decentralized app, cryptocurrency, criptocurrency exchange, exchange, exchange token, ethereum, ethereum token, erc20, futures, perpetuals, futures protocol'
+    'unlimited exchange , injective protocol, dapp, decentralized app, cryptocurrency, criptocurrency exchange, exchange, exchange token, ethereum, ethereum token, erc20, futures, perpetuals, futures protocol'
   const author = 'InjectiveProtocol'
 
   const appMetaTags = () => [
@@ -47,7 +47,7 @@ export const metaTags = (): {
     {
       hid: 'og:image',
       property: 'og:image',
-      content: `${BASE_URL}/images/og.jpeg`
+      content: `${BASE_URL}/images/og.jpg`
     },
     {
       hid: 'og:description',
@@ -62,16 +62,16 @@ export const metaTags = (): {
     {
       hid: 'twitter:site',
       property: 'twitter:site',
-      content: '@InjectiveLabs'
+      content: '@UnlimitedExch'
     },
     {
       name: 'twitter:image',
-      content: `${BASE_URL}/images/og.jpeg`
+      content: `${BASE_URL}/images/og.jpg`
     },
     {
       hid: 'twitter:creator',
       property: 'twitter:creator',
-      content: '@InjectiveLabs'
+      content: '@UnlimitedExch'
     },
     {
       hid: 'twitter:description',
@@ -96,12 +96,12 @@ export const metaTags = (): {
       ogSiteName: title,
       ogTitle: title,
       ogDescription: description,
-      ogHost: 'https://injective.exchange',
-      ogUrl: 'https://injective.exchange',
-      ogImage: `${BASE_URL}/images/og.jpeg`,
+      ogHost: 'https://unlimited.exchange',
+      ogUrl: 'https://unlimited.exchange',
+      ogImage: `${BASE_URL}/images/og.jpg`,
       twitterCard: 'summary_large_image',
-      twitterSite: '@InjectiveLabs',
-      twitterCreator: '@InjectiveLabs'
+      twitterSite: '@UnlimitedExch',
+      twitterCreator: '@UnlimitedExch'
     }
   }
 
@@ -109,7 +109,7 @@ export const metaTags = (): {
     return {
       name: title,
       description,
-      short_name: 'Injective Exchange'
+      short_name: 'Unlimited Exchange'
       // theme_color: 'dark'
     }
   }

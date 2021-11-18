@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h3 class="text-xl font-bold text-gray-200">
-      {{ $t('getting_started') }}
+      <h3 class="text-xl font-bold text-gray-200 mt-20">
+    {{ $t('getting_started') }}
     </h3>
     <div class="grid grid-cols-4 md:grid-cols-12 gap-4 lg:gap-6 mt-6">
       <v-resource-card
@@ -40,36 +40,30 @@ export default Vue.extend({
     return {
       cards: [
         {
-          category: 'External Link',
-          title: 'Injective Hub',
-          link: 'https://hub.injective.network',
+          category: 'Docs',
+          title: 'Decentralized order book',
           description:
-            'A unified interface for Injective staking, governance, insurance funds and wallets.',
-          linkText: 'Visit the Injective Hub',
-          illustration: '/svg/hub-new.svg',
+            'Familiar trading experience as centralized exchanges while remaining entirely decentralized.',
+          illustration: '/svg/order-book.svg',
           imageClass:
             'w-32 h-32 -mt-5 md:w-24 md:h-24 md:mt-4 lg:w-36 lg:h-36 lg:-mt-5'
         },
         {
           category: 'Docs',
-          title: 'Injective API',
-          link: 'https://api.injective.exchange/',
-          description: 'An institutional grade API custom made for Injective.',
-          linkText: 'Explore the docs',
-          illustration: '/svg/api-v1.svg',
+          title: 'Zero fees',
+          description: 'Trade as much as you want without any gas fees. Once you deposit the funds, you are trading without any gas fees.',
+          illustration: '/svg/zero-fees.svg',
           imageClass:
-            'w-36 h-36 -mt-6 md:w-38 md:h-38 md:-mt-2 lg:w-40 lg:h-40 lg:-mt-8'
+            'w-32 h-32 -mt-5 md:w-24 md:h-24 md:mt-4 lg:w-36 lg:h-36 lg:-mt-5'
         },
         {
-          category: 'External Link',
-          title: 'The Ecosystem',
-          link: 'https://injectiveprotocol.com/ecosystem',
+          category: 'Docs',
+          title: 'Cross-chain transactions',
           description:
-            'Injective has one of the fastest growing DeFi ecosystems in the world.',
-          linkText: 'Join Injective',
-          illustration: '/svg/ecosystem-v1.svg',
+            'You can transact any asset of your choice without any friction across sovereign blockchain networks.',
+          illustration: '/svg/cross-chain.svg',
           imageClass:
-            'w-24 h-24 md:w-24 md:h-24 md:mt-4 lg:w-32 lg:h-32 lg:-mt-2'
+            'w-32 h-32 -mt-5 md:w-24 md:h-24 md:mt-4 lg:w-36 lg:h-36 lg:-mt-5'
         }
       ]
     }

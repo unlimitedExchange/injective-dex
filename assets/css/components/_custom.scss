@@ -219,3 +219,9 @@ nav {
     @apply bg-gray-950 font-semibold;
   }
 }
+
+.hero-background {
+  @apply bg-no-repeat;
+  background-image: url('/svg/hero-bg.svg');
+  background-size: 100%;
+}

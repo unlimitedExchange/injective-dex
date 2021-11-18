@@ -4,7 +4,7 @@ const { metaTags } = require('./app/utils/generators')
 module.exports = {
   pwa: {
     icon: {
-      source: resolve(__dirname, './client/static/favicon-v4.png')
+      source: resolve(__dirname, './static/favicon-v4.png')
     },
 
     meta: {
