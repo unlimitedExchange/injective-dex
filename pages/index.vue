@@ -3,7 +3,7 @@
     <div class="container">
       <div class="w-full mx-auto xl:w-4/5">
         <div class="grid xl:grid-cols-2 gap-4 mt-32 mb-32">
-          <div class="2xl:w-4/5">
+          <div>
             <p class=" mb-3 text-primary-500">Decentralized. Zero Fees. Secure.</p>
             <h1 class="text-5xl font-bold">Welcome to <br />Unlimited Exchange</h1>
             <p class="mt-6 max-w-6xl mx-auto opacity-75">Unlimited Exchange is a decentralized exchange which allows you to access various financial markets on Injective’s fast, multi-chain, secure, and zero gas fee exchange protocol. Borderless trading without restrictions.</p>
