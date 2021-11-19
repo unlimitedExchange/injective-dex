@@ -2,6 +2,8 @@
   <li
     v-if="market"
     class="flex h-6 items-center last:mb-0 first:mt-0 relative cursor-pointer w-full overflow-hidden"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
     <span class="size-col" :class="newRecordClass"></span>
     <span
@@ -25,8 +27,17 @@
         }"
       >
         <v-number
+          :prefix="
+            aggregatedValue.gt(record.aggregatedPrice) && recordTypeBuy
+              ? '<'
+              : ''
+          "
           :decimals="aggregation < 0 ? 0 : aggregation"
-          :number="record.displayPrice"
+          :number="
+            aggregatedValue.gt(record.aggregatedPrice)
+              ? aggregatedValue
+              : record.aggregatedPrice
+          "
           dont-group-values
         />
       </span>
@@ -90,6 +101,16 @@ export default Vue.extend({
     type: {
       required: true,
       type: String as PropType<DerivativeOrderSide>
+    },
+
+    position: {
+      required: true,
+      type: Number
+    },
+
+    activePosition: {
+      type: Number,
+      default: null
     },
 
     record: {
@@ -198,6 +219,14 @@ export default Vue.extend({
       }
 
       return oldQuantityBN.gte(quantityBN) ? Change.Decrease : Change.Increase
+    },
+
+    aggregatedValue(): BigNumberInBase {
+      const { aggregation } = this
+
+      const value = new BigNumberInBase(10 ** Math.abs(aggregation))
+
+      return aggregation < 0 ? value : new BigNumberInBase(1).dividedBy(value)
     }
   },
 
@@ -205,11 +234,11 @@ export default Vue.extend({
     onPriceClick() {
       const { market, record } = this
 
-      if (!market || !record.displayPrice) {
+      if (!market || !record.aggregatedPrice) {
         return
       }
 
-      this.$root.$emit('orderbook-price-click', record.displayPrice)
+      this.$root.$emit('orderbook-price-click', record.aggregatedPrice)
     },
 
     onQuantityClick() {
@@ -225,15 +254,25 @@ export default Vue.extend({
     onTotalNotionalClick() {
       const { total, record, type, market } = this
 
-      if (!market || !record.displayPrice) {
+      if (!market || !record.aggregatedPrice) {
         return
       }
 
       this.$root.$emit('orderbook-notional-click', {
         total,
         type,
-        price: record.displayPrice
+        price: record.aggregatedPrice
       })
+    },
+
+    handleMouseEnter() {
+      const { position } = this
+
+      this.$emit('update:active-position', position)
+    },
+
+    handleMouseLeave() {
+      this.$emit('update:active-position', null)
     }
   }
 })

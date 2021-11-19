@@ -74,12 +74,15 @@
             </span>
           </div>
         </v-input>
-        <span v-if="amountError" class="text-2xs font-semibold text-red-500">
+        <span
+          v-if="amountError"
+          class="text-2xs font-semibold text-red-500 leading-1"
+        >
           {{ amountError }}
         </span>
         <span
           v-if="priceError && tradingTypeMarket"
-          class="text-2xs font-semibold text-red-500"
+          class="text-2xs font-semibold text-red-500 leading-1"
         >
           {{ priceError }}
         </span>
@@ -99,12 +102,16 @@
         >
           <span slot="addon">{{ market.quoteToken.symbol.toUpperCase() }}</span>
         </v-input>
-        <span v-if="priceError" class="text-red-500 font-semibold text-2xs">
+        <span
+          v-if="priceError"
+          class="text-red-500 font-semibold text-2xs leading-1"
+        >
           {{ priceError }}
         </span>
       </div>
 
       <v-order-leverage
+        v-if="!orderTypeReduceOnly"
         class="mt-6"
         :leverage="form.leverage"
         :max-leverage="maxLeverageAvailable.toFixed()"
@@ -151,7 +158,14 @@
       }"
       @drawer-toggle="onDetailsDrawerToggle"
     />
-    <div class="mt-4">
+    <div>
+      <p
+        v-if="executionPriceHasHighDeviationWarning && !hasErrors"
+        class="text-2xs text-red-200 mb-4"
+      >
+        {{ $t('execution_price_far_away_from_last_traded_price') }}
+      </p>
+
       <v-button
         lg
         :status="status"
@@ -185,7 +199,9 @@ import {
   DEFAULT_MAX_SLIPPAGE,
   ZERO_IN_BASE,
   NUMBER_REGEX,
-  DEFAULT_PRICE_WARNING_DEVIATION
+  DEFAULT_PRICE_WARNING_DEVIATION,
+  DEFAULT_MARKET_PRICE_WARNING_DEVIATION,
+  DEFAULT_MAX_PRICE_BAND_DIFFERENCE
 } from '~/app/utils/constants'
 import ButtonCheckbox from '~/components/inputs/button-checkbox.vue'
 import VModalOrderConfirm from '~/components/partials/modals/order-confirm.vue'
@@ -403,6 +419,12 @@ export default Vue.extend({
         return ZERO_IN_BASE
       }
 
+      const makerFeeRate = new BigNumberInBase(market.makerFeeRate)
+
+      if (makerFeeRate.lte(0)) {
+        return makerFeeRate
+      }
+
       return new BigNumberInBase(market.makerFeeRate).times(
         new BigNumberInBase(1).minus(makerFeeRateDiscount)
       )
@@ -413,6 +435,13 @@ export default Vue.extend({
 
       if (!market) {
         return ZERO_IN_BASE
+      }
+
+      const makerFeeRate = new BigNumberInBase(market.makerFeeRate)
+      const takerFeeRate = new BigNumberInBase(market.takerFeeRate)
+
+      if (makerFeeRate.lte(0)) {
+        return takerFeeRate
       }
 
       return new BigNumberInBase(market.takerFeeRate).times(
@@ -840,6 +869,33 @@ export default Vue.extend({
       return deviation.gt(DEFAULT_PRICE_WARNING_DEVIATION)
     },
 
+    executionPriceHasHighDeviationWarning(): boolean {
+      const {
+        executionPrice,
+        orderTypeBuy,
+        tradingTypeMarket,
+        lastTradedPrice
+      } = this
+
+      if (!tradingTypeMarket) {
+        return false
+      }
+
+      if (executionPrice.lte(0)) {
+        return false
+      }
+
+      const deviation = new BigNumberInBase(1)
+        .minus(
+          orderTypeBuy
+            ? lastTradedPrice.dividedBy(executionPrice)
+            : executionPrice.dividedBy(lastTradedPrice)
+        )
+        .times(100)
+
+      return deviation.gt(DEFAULT_MARKET_PRICE_WARNING_DEVIATION)
+    },
+
     amountNotValidNumberError(): TradeError | undefined {
       const { form } = this
 
@@ -854,6 +910,49 @@ export default Vue.extend({
       return {
         amount: this.$t('not_valid_number')
       }
+    },
+
+    priceHighDeviationFromMidOrderbookPrice(): TradeError | undefined {
+      const {
+        tradingTypeMarket,
+        hasPrice,
+        hasAmount,
+        market,
+        sells,
+        buys,
+        executionPrice
+      } = this
+
+      if (tradingTypeMarket || !hasPrice || !hasAmount || !market) {
+        return
+      }
+
+      const [sell] = sells
+      const [buy] = buys
+      const highestBuy = new BigNumberInWei(buy ? buy.price : 0).toBase(
+        market.quoteToken.decimals
+      )
+      const lowestSell = new BigNumberInWei(sell ? sell.price : 0).toBase(
+        market.quoteToken.decimals
+      )
+      const middlePrice = highestBuy.plus(lowestSell).dividedBy(2)
+      const acceptableMax = middlePrice.times(
+        new BigNumberInBase(1).plus(DEFAULT_MAX_PRICE_BAND_DIFFERENCE.div(100))
+      )
+      const acceptableMin = middlePrice.times(
+        new BigNumberInBase(1).minus(DEFAULT_MAX_PRICE_BAND_DIFFERENCE.div(100))
+      )
+
+      if (
+        executionPrice.lt(acceptableMin) ||
+        executionPrice.gt(acceptableMax)
+      ) {
+        return {
+          price: this.$t('your_order_has_high_price_deviation')
+        }
+      }
+
+      return undefined
     },
 
     priceError(): string | null {
@@ -883,6 +982,10 @@ export default Vue.extend({
 
       if (this.maxLeverageError) {
         return this.maxLeverageError
+      }
+
+      if (this.priceHighDeviationFromMidOrderbookPrice) {
+        return this.priceHighDeviationFromMidOrderbookPrice
       }
 
       if (this.reduceOnlyExcessError) {
@@ -969,7 +1072,14 @@ export default Vue.extend({
     },
 
     margin(): BigNumberInBase {
-      const { executionPrice, hasPrice, hasAmount, form, market } = this
+      const {
+        executionPrice,
+        orderTypeReduceOnly,
+        hasPrice,
+        hasAmount,
+        form,
+        market
+      } = this
 
       if (!hasPrice || !hasAmount || !market) {
         return ZERO_IN_BASE
