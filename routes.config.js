@@ -1,16 +1,20 @@
-const spot = [
+const { IS_TESTNET } = require('./app/utils/constants')
+
+const testnetSpot = [
   'inj-usdt',
+  'atom-usdt',
+  'weth-usdt',
+  'link-usdt',
+  'link-usdc',
+  'axs-usdt',
   'inj-usdc',
   'bnb-usdt',
   'bnb-usdc',
   'wbtc-usdc',
   'wbtc-usdt',
-  'weth-usdt',
-  'weth-usdc',
   'usdt-usdc',
   'usdc-usdt',
-  'link-usdt',
-  'link-usdc',
+  'weth-usdc',
   'aave-usdt',
   'aave-usdc',
   'matic-usdt',
@@ -18,7 +22,6 @@ const spot = [
   'sushi-usdt',
   'sushi-usdc',
   'grt-usdt',
-  'axs-usdt',
   'grt-usdc',
   'uni-usdt',
   'uni-usdc',
@@ -26,35 +29,37 @@ const spot = [
   'qnt-usdt',
   'yfi-usdt',
   'snx-usdt',
-  'axs-usdt',
   'zrx-usdt'
 ]
-
-const derivatives = [
-  'inj-usdt-perp',
+const mainnetSpot = [
   'inj-usdt',
-  'bnb-usdt-perp',
-  'bnb-usdt',
-  'btc-usdt-perp',
-  'btc-usdt',
-  'btc-usdc-perp',
-  'btc-usdc',
-  'eth-usdt-perp',
-  'eth-usdt-perp-band',
-  'eth-usdt',
-  'link-usdt-perp',
+  // 'atom-usdt',
+  'weth-usdt',
   'link-usdt',
-  'comp-usdt-perp',
-  'comp-usdt',
-  'uni-usdt-perp',
-  'uni-usdt',
-  'grt-usdt-perp',
-  'grt-usdt',
-  'snx-usdt-perp',
-  'snx-usdt',
-  'bat-usdt-perp',
-  'bat-usdt'
+  'link-usdc',
+  'axs-usdt'
 ]
+const spot = IS_TESTNET ? testnetSpot : mainnetSpot
+
+const testnetDerivatives = [
+  'btc-usdt-perp',
+  'eth-usdt-perp',
+  'bnb-usdt-perp',
+  'inj-usdt-perp',
+  'eth-usdt-perp-band',
+  'link-usdt-perp',
+  'comp-usdt-perp',
+  'uni-usdt-perp',
+  'grt-usdt-perp',
+  'snx-usdt-perp',
+  'bat-usdt-perp'
+]
+const mainnetDerivatives = [
+  'btc-usdt-perp'
+  // 'eth-usdt-perp',
+  // 'bnb-usdt-perp'
+]
+const derivatives = IS_TESTNET ? testnetDerivatives : mainnetDerivatives
 
 module.exports = [
   '/',
