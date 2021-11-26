@@ -30,6 +30,7 @@ export default {
   last_traded_price: 'Last Traded Price',
   last_traded_price_tooltip: 'The last price at which a trade occurred.',
   market_change_24h: 'Change (24h)',
+  total_market_volume_24h: 'Total Volume (24H)',
   market_change_24h_tooltip: 'The change in price over the past 24 hours.',
   market_volume_24h: 'Volume (24h)',
   market_volume_24h_tooltip: 'The total trade volume over the past 24 hours.',
@@ -436,7 +437,7 @@ export default {
     'The amount of INJ required to be staked. Staking INJ secures the protocol, earns rewards and can help obtain a more preferable fee tier.',
   fee_discount_fees_paid: 'Total Fees Paid',
   fee_discount_fees_paid_tooltip:
-    'The total fees required to be paid on Injective. Fees are paid to execute trades on the protocol. The amount of fees paid helps determine the fee tier.',
+    'The total fees required to be paid on Injective. Fees are paid to execute trades on the protocol. The amount of fees paid helps determine the fee tier. The total fees collected are summed up on a 30 day rolling basis period.',
   fee_discount_maker: 'Maker Rate Discount',
   fee_discount_maker_tooltip: 'Maker fee discount based on the fee tier.',
   fee_discount_taker: 'Taker Rate Discount',
@@ -462,7 +463,7 @@ export default {
     'The current total reward points collected by all addresses on Injective in this campaign. This number will grow until the end of campaign.',
   countdown_campaign: 'Campaign end time',
   countdown_campaign_tooltip:
-    'Date and time when the current campaign ends (in UTC). Any reward point earned after the countdown will be counted toward the next campaign.',
+    'Date and time when the current campaign ends (shown in the timezone of your browser). Any reward point earned after the countdown will be counted toward the next campaign.',
   reward_earned_up_to_date: 'Rewards earned up to date',
   reward_earned_up_to_date_tooltip: 'Rewards earned up to date tooltip',
   market_total_tooltip:
@@ -507,5 +508,6 @@ export default {
   execution_price_far_away_from_last_traded_price:
     'Please note that the execution price for this trade deviates a lot from the last traded price.',
   there_are_no_disqualified_markets_on_this_relayer:
-    'There are no disqualified markets on this relayer.'
+    'There are no disqualified markets on this relayer.',
+  liquidation: 'Liquidation'
 }

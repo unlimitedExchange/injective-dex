@@ -33,10 +33,9 @@ const testnetSpot = [
 ]
 const mainnetSpot = [
   'inj-usdt',
-  // 'atom-usdt',
+  'atom-usdt',
   'weth-usdt',
   'link-usdt',
-  'link-usdc',
   'axs-usdt'
 ]
 const spot = IS_TESTNET ? testnetSpot : mainnetSpot

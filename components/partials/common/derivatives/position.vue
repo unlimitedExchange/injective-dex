@@ -87,7 +87,7 @@
           <span class="flex" style="margin-top: -2px">
             ({{
               (percentagePnl.gte(0) ? '+' : '') + percentagePnl.toFormat(2)
-            }})%
+            }}%)
           </span>
         </div>
       </div>
@@ -379,7 +379,7 @@ export default Vue.extend({
             new BigNumberInBase(1).plus(market.takerFeeRate)
           )
 
-      return feeAdjustedBankruptcyPrice.gte(0)
+      return feeAdjustedBankruptcyPrice.gt(0)
         ? feeAdjustedBankruptcyPrice
         : minTickPrice
     },
@@ -536,7 +536,7 @@ export default Vue.extend({
     },
 
     handleClosePosition() {
-      const { position, market, feeAdjustedBankruptcyPrice } = this
+      const { position, market, liquidationPrice } = this
 
       if (!market) {
         return
@@ -551,7 +551,7 @@ export default Vue.extend({
             position.direction === TradeDirection.Long
               ? DerivativeOrderSide.Sell
               : DerivativeOrderSide.Buy,
-          price: feeAdjustedBankruptcyPrice,
+          price: liquidationPrice,
           quantity: new BigNumberInBase(position.quantity)
         })
         .then(() => {
