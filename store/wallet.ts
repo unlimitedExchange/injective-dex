@@ -6,6 +6,7 @@ import { getInjectiveAddress } from '~/app/services/account'
 import { validateMetamask, isMetamaskInstalled } from '~/app/services/metamask'
 import { WalletConnectStatus } from '~/types'
 import { cancelEventsOnWeb3Strategy } from '~/app/web3'
+import { GAS_FREE_DEPOSIT_REBATE_ENABLED } from '~/app/utils/constants'
 
 const initialStateFactory = () => ({
   walletConnectStatus: WalletConnectStatus.idle as WalletConnectStatus,
@@ -119,6 +120,10 @@ export const actions = actionTree(
 
     async initPage(_) {
       await this.app.$accessor.token.getAllTokenWithBalanceAndAllowance()
+
+      if (GAS_FREE_DEPOSIT_REBATE_ENABLED) {
+        await this.app.$accessor.gasRebate.init()
+      }
     },
 
     async isMetamaskInstalled({ commit }) {
@@ -277,6 +282,7 @@ export const actions = actionTree(
     },
 
     async logout({ commit }) {
+      await this.app.$accessor.account.reset()
       await this.app.$accessor.account.reset()
       await this.app.$accessor.token.reset()
       await this.app.$accessor.spot.resetSubaccount()

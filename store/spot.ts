@@ -29,6 +29,7 @@ import {
   batchCancelOrders
 } from '~/app/services/spot'
 import { ZERO_IN_BASE } from '~/app/utils/constants'
+import { zeroSpotMarketSummary } from '~/app/utils/helpers'
 
 const initialStateFactory = () => ({
   markets: [] as UiSpotMarket[],
@@ -247,8 +248,20 @@ export const actions = actionTree(
     },
 
     async init({ commit }) {
-      commit('setMarkets', await fetchMarkets())
-      commit('setMarketsSummary', await fetchMarketsSummary())
+      const markets = await fetchMarkets()
+
+      commit('setMarkets', markets)
+
+      const marketsSummary = await fetchMarketsSummary()
+
+      if (!marketsSummary || (marketsSummary && marketsSummary.length === 0)) {
+        commit(
+          'setMarketsSummary',
+          markets.map((market) => zeroSpotMarketSummary(market.marketId))
+        )
+      } else {
+        commit('setMarketsSummary', marketsSummary)
+      }
     },
 
     async changeMarket({ commit, state }, marketSlug: string) {
@@ -451,7 +464,7 @@ export const actions = actionTree(
     },
 
     async fetchMarketsSummary({ state, commit }) {
-      const { marketsSummary, market } = state
+      const { marketsSummary, markets, market } = state
 
       if (marketsSummary.length === 0) {
         return
@@ -459,17 +472,27 @@ export const actions = actionTree(
 
       const updatedMarketsSummary = await fetchMarketsSummary(marketsSummary)
 
-      if (market) {
-        const updatedMarketSummary = updatedMarketsSummary.find(
-          (m) => m.marketId === market.marketId
+      if (
+        !updatedMarketsSummary ||
+        (updatedMarketsSummary && updatedMarketsSummary.length === 0)
+      ) {
+        commit(
+          'setMarketsSummary',
+          markets.map((market) => zeroSpotMarketSummary(market.marketId))
         )
+      } else {
+        if (market) {
+          const updatedMarketSummary = updatedMarketsSummary.find(
+            (m) => m.marketId === market.marketId
+          )
 
-        if (updatedMarketSummary) {
-          commit('setMarketSummary', updatedMarketSummary)
+          if (updatedMarketSummary) {
+            commit('setMarketSummary', updatedMarketSummary)
+          }
         }
-      }
 
-      commit('setMarketsSummary', updatedMarketsSummary)
+        commit('setMarketsSummary', updatedMarketsSummary)
+      }
     },
 
     async fetchSubaccountMarketTrades({ state, commit }) {

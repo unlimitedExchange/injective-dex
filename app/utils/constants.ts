@@ -9,6 +9,8 @@ import { ChainId } from '@injectivelabs/ts-types'
 export const IS_DEVELOPMENT: boolean = process.env.NODE_ENV === 'development'
 export const IS_PRODUCTION: boolean = process.env.NODE_ENV === 'production'
 export const METRICS_ENABLED: boolean = process.env.METRICS_ENABLED === 'true'
+export const GAS_FREE_DEPOSIT_REBATE_ENABLED: boolean =
+  process.env.GAS_FREE_DEPOSIT_REBATE_ENABLED === 'true'
 export const TRANSFER_RESTRICTIONS_ENABLED: boolean =
   process.env.TRANSFER_RESTRICTIONS_ENABLED === 'true'
 export const GEO_IP_RESTRICTIONS_ENABLED: boolean =
@@ -32,6 +34,10 @@ export const GWEI_IN_WEI: BigNumber = new BigNumber(1000000000)
 
 export const BASE_URL: string = process.env.APP_BASE_URL
 export const FEE_RECIPIENT: string = process.env.APP_FEE_RECIPIENT
+export const APP_EXCHANGE_API_ENDPOINT: string =
+  process.env.APP_APP_EXCHANGE_API_ENDPOINT || ''
+export const APP_SENTRY_GRPC_ENDPOINT: string =
+  process.env.APP_APP_SENTRY_GRPC_ENDPOINT || ''
 export const UI_DEFAULT_MIN_DISPLAY_DECIMALS = 2
 export const UI_DEFAULT_DISPLAY_DECIMALS = 4
 export const UI_DEFAULT_MAX_DISPLAY_DECIMALS = 6
@@ -71,3 +77,9 @@ export const INJ_COIN_GECKO_ID = 'injective-protocol'
 
 // eslint-disable-next-line prefer-regex-literals
 export const NUMBER_REGEX = new RegExp(/^-?(0|[1-9]\d*)?(\.\d+)?$/)
+
+export const PEGGY_GRAPH_URL =
+  'https://api.thegraph.com/subgraphs/name/injectivelabs/injective-peggo-mainnet'
+export const APP_GAS_REBATE_API = process.env.APP_GAS_REBATE_API as string
+export const MIN_AMOUNT_REQUIRED_FOR_GAS_REBATE = 500
+export const MIN_TIMESTAMP_REQUIRED_FOR_GAS_REBATE = 1638313200 // 01 Dec 2020 00:00

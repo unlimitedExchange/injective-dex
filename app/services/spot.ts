@@ -74,15 +74,23 @@ export const fetchMarketSummary = async (
 
 export const fetchMarketsSummary = async (
   oldMarketsSummary?: UiSpotMarketSummary[]
-): Promise<UiSpotMarketSummary[]> => {
+): Promise<UiSpotMarketSummary[] | undefined> => {
   const promise = spotChronosConsumer.fetchSpotMarketsSummary()
   const marketsSummary = await metricsProvider.sendAndRecord(
     promise,
     SpotMetrics.FetchMarketsSummary
   )
 
+  if (!oldMarketsSummary && !marketsSummary) {
+    return undefined
+  }
+
+  if (!marketsSummary) {
+    return oldMarketsSummary as UiSpotMarketSummary[]
+  }
+
   if (!oldMarketsSummary) {
-    return marketsSummary
+    return marketsSummary.length > 0 ? marketsSummary : undefined
   }
 
   const marketsWithOldSummaries = oldMarketsSummary.filter((market) =>

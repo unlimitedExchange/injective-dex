@@ -36,6 +36,7 @@
       }"
     >
       <v-icon-arrow
+        v-if="!lastTradedPrice.isNaN()"
         class="transform w-3 h-3 mr-1"
         :class="{
           'text-aqua-500 rotate-90': lastPriceChange !== Change.Decrease,
@@ -43,6 +44,7 @@
         }"
       />
       <span
+        v-if="!lastTradedPrice.isNaN()"
         :class="{
           'text-aqua-500': lastPriceChange !== Change.Decrease,
           'text-red-500': lastPriceChange === Change.Decrease
@@ -53,6 +55,7 @@
           {{ market.quoteToken.symbol }}
         </span>
       </span>
+      <span v-else class="text-gray-400">&mdash;</span>
     </span>
     <span
       class="col-span-1 text-2xs md:text-sm text-gray-300 text-left md:hidden"
@@ -66,9 +69,13 @@
         'col-span-1 md:col-span-4': simple
       }"
     >
-      <span :class="change.gte(0) ? 'text-aqua-500' : 'text-red-500'">
+      <span
+        v-if="!change.isNaN()"
+        :class="change.gte(0) ? 'text-aqua-500' : 'text-red-500'"
+      >
         {{ changeToFormat }}%
       </span>
+      <span v-else class="text-gray-400">&mdash;</span>
     </span>
     <span
       v-if="!simple"
@@ -81,10 +88,13 @@
       class="text-2xs md:text-sm font-mono text-right"
       :class="{ 'col-span-1 md:col-span-3': !simple, 'col-span-4': simple }"
     >
-      {{ volumeToFormat }}
-      <span class="text-xs text-gray-500 ml-1">
-        {{ market.quoteToken.symbol }}
+      <span v-if="!volume.isNaN()">
+        {{ volumeToFormat }}
+        <span class="text-xs text-gray-500 ml-1">
+          {{ market.quoteToken.symbol }}
+        </span>
       </span>
+      <span v-else class="text-gray-400">&mdash;</span>
     </span>
   </TableRow>
 </template>
@@ -256,6 +266,8 @@ export default Vue.extend({
   methods: {
     handleClickOnMarket() {
       const { market } = this
+
+      this.$root.$emit('close-market-slideout')
 
       if (market.type === MarketType.Derivative) {
         return this.$router.push({

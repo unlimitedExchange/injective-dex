@@ -19,6 +19,7 @@ jobs:
       DEST_DIR: www
 
       ## Flags
+      GAS_FREE_DEPOSIT_REBATE_ENABLED: true
       META_TAGS_ENABLED: true
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       MAINTENANCE_ENABLED: false
@@ -26,7 +27,13 @@ jobs:
       GEO_IP_RESTRICTIONS_ENABLED: true
       TRANSFER_RESTRICTIONS_ENABLED: false
 
+      ## Endpoints
+      APP_EXCHANGE_API_ENDPOINT: ''
+      APP_SENTRY_GRPC_ENDPOINT: ''
+
       ## Secret
+      APP_GAS_REBATE_API: ${{ secrets.APP_GAS_REBATE_API }}
+      APP_ELEVIO_ID: ${{ secrets.APP_ELEVIO_ID }}
       APP_GOOGLE_ANALYTICS_KEY: ${{ secrets.APP_GOOGLE_ANALYTICS_KEY }}
       APP_GOOGLE_SITE_VERIFICATION_KEY: ${{ secrets.APP_GOOGLE_SITE_VERIFICATION_KEY }},
       APP_FEE_RECIPIENT: ${{ secrets.APP_FEE_RECIPIENT }}
@@ -82,6 +89,7 @@ jobs:
       DEST_DIR: www
 
       ## Flags
+      GAS_FREE_DEPOSIT_REBATE_ENABLED: true
       META_TAGS_ENABLED: true
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       MAINTENANCE_ENABLED: false
@@ -89,7 +97,13 @@ jobs:
       GEO_IP_RESTRICTIONS_ENABLED: true
       TRANSFER_RESTRICTIONS_ENABLED: false
 
+      ## Endpoints
+      APP_EXCHANGE_API_ENDPOINT: ''
+      APP_SENTRY_GRPC_ENDPOINT: ''
+
       ## Secret
+      APP_GAS_REBATE_API: ${{ secrets.APP_GAS_REBATE_API }}
+      APP_ELEVIO_ID: ${{ secrets.APP_ELEVIO_ID }}
       APP_GOOGLE_ANALYTICS_KEY: ${{ secrets.APP_GOOGLE_ANALYTICS_KEY }}
       APP_GOOGLE_SITE_VERIFICATION_KEY: ${{ secrets.APP_GOOGLE_SITE_VERIFICATION_KEY }},
       APP_FEE_RECIPIENT: ${{ secrets.APP_FEE_RECIPIENT }}
@@ -145,6 +159,7 @@ jobs:
       DEST_DIR: www
 
       ## Flags
+      GAS_FREE_DEPOSIT_REBATE_ENABLED: false
       META_TAGS_ENABLED: true
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       MAINTENANCE_ENABLED: false
@@ -152,7 +167,13 @@ jobs:
       GEO_IP_RESTRICTIONS_ENABLED: false
       TRANSFER_RESTRICTIONS_ENABLED: false
 
+      ## Endpoints
+      APP_EXCHANGE_API_ENDPOINT: ''
+      APP_SENTRY_GRPC_ENDPOINT: ''
+
       ## Secret
+      APP_GAS_REBATE_API: ${{ secrets.APP_GAS_REBATE_API }}
+      APP_ELEVIO_ID: ${{ secrets.APP_ELEVIO_ID }}
       APP_GOOGLE_ANALYTICS_KEY: ${{ secrets.APP_GOOGLE_ANALYTICS_KEY }}
       APP_GOOGLE_SITE_VERIFICATION_KEY: ${{ secrets.APP_GOOGLE_SITE_VERIFICATION_KEY }},
       APP_FEE_RECIPIENT: ${{ secrets.APP_FEE_RECIPIENT }}
@@ -208,6 +229,7 @@ jobs:
       DEST_DIR: www
 
       ## Flags
+      GAS_FREE_DEPOSIT_REBATE_ENABLED: false
       META_TAGS_ENABLED: true
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       MAINTENANCE_ENABLED: false
@@ -215,7 +237,13 @@ jobs:
       GEO_IP_RESTRICTIONS_ENABLED: false
       TRANSFER_RESTRICTIONS_ENABLED: false
 
+      ## Endpoints
+      APP_EXCHANGE_API_ENDPOINT: ''
+      APP_SENTRY_GRPC_ENDPOINT: ''
+
       ## Secret
+      APP_GAS_REBATE_API: ${{ secrets.APP_GAS_REBATE_API }}
+      APP_ELEVIO_ID: ${{ secrets.APP_ELEVIO_ID }}
       APP_GOOGLE_ANALYTICS_KEY: ${{ secrets.APP_GOOGLE_ANALYTICS_KEY }}
       APP_GOOGLE_SITE_VERIFICATION_KEY: ${{ secrets.APP_GOOGLE_SITE_VERIFICATION_KEY }},
       APP_FEE_RECIPIENT: ${{ secrets.APP_FEE_RECIPIENT }}

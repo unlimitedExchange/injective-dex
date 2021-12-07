@@ -435,7 +435,6 @@ export default Vue.extend({
         orderTypeBuy,
         sells,
         buys,
-        slippage,
         hasAmount,
         market,
         amount,
@@ -459,9 +458,7 @@ export default Vue.extend({
           market
         })
 
-        return new BigNumberInBase(
-          worstPrice.times(slippage).toFixed(market.priceDecimals)
-        )
+        return new BigNumberInBase(worstPrice.toFixed(market.priceDecimals))
       }
 
       if (price.isNaN()) {
@@ -470,6 +467,22 @@ export default Vue.extend({
 
       return new BigNumberInBase(
         new BigNumberInBase(price).toFixed(market.priceDecimals)
+      )
+    },
+
+    executionPriceWithSlippage(): BigNumberInBase {
+      const { tradingTypeMarket, executionPrice, market, slippage } = this
+
+      if (!market) {
+        return ZERO_IN_BASE
+      }
+
+      if (!tradingTypeMarket) {
+        return executionPrice
+      }
+
+      return new BigNumberInBase(
+        executionPrice.times(slippage).toFixed(market.priceDecimals)
       )
     },
 
@@ -1244,7 +1257,7 @@ export default Vue.extend({
     },
 
     submitMarketOrder() {
-      const { orderType, market, executionPrice, amount } = this
+      const { orderType, market, executionPriceWithSlippage, amount } = this
 
       if (!market) {
         return
@@ -1255,7 +1268,7 @@ export default Vue.extend({
       this.$accessor.spot
         .submitMarketOrder({
           quantity: amount,
-          price: executionPrice,
+          price: executionPriceWithSlippage,
           orderType
         })
         .then(() => {

@@ -120,10 +120,13 @@ import VSelectCustom from '~/components/inputs/select-custom.vue'
 import {
   INJECTIVE_DENOM,
   INJ_FEE_BUFFER,
-  UI_DEFAULT_MIN_DISPLAY_DECIMALS,
+  UI_DEFAULT_DISPLAY_DECIMALS,
   ZERO_IN_BASE
 } from '~/app/utils/constants'
-import { BankBalanceWithTokenMetaData } from '~/types'
+import {
+  BankBalanceWithTokenMetaData,
+  IbcBankBalanceWithTokenMetaData
+} from '~/types'
 
 export default Vue.extend({
   components: {
@@ -149,8 +152,23 @@ export default Vue.extend({
       return this.$accessor.wallet.isUserWalletConnected
     },
 
-    balancesWithTokenMetaData(): BankBalanceWithTokenMetaData[] {
+    bankBalancesWithTokenMetaData(): BankBalanceWithTokenMetaData[] {
       return this.$accessor.bank.balancesWithTokenMetaData
+    },
+
+    ibcBalancesWithTokenMetaData(): IbcBankBalanceWithTokenMetaData[] {
+      return this.$accessor.bank.ibcBalancesWithTokenMetaData
+    },
+
+    balancesWithTokenMetaData(): Array<
+      BankBalanceWithTokenMetaData | IbcBankBalanceWithTokenMetaData
+    > {
+      const {
+        bankBalancesWithTokenMetaData,
+        ibcBalancesWithTokenMetaData
+      } = this
+
+      return [...bankBalancesWithTokenMetaData, ...ibcBalancesWithTokenMetaData]
     },
 
     address(): string {
@@ -185,7 +203,7 @@ export default Vue.extend({
       const { balance } = this
 
       return balance.toFormat(
-        UI_DEFAULT_MIN_DISPLAY_DECIMALS,
+        UI_DEFAULT_DISPLAY_DECIMALS,
         BigNumberInBase.ROUND_DOWN
       )
     },
@@ -206,7 +224,7 @@ export default Vue.extend({
       const { balanceWithGasBuffer } = this
 
       return balanceWithGasBuffer.toFixed(
-        UI_DEFAULT_MIN_DISPLAY_DECIMALS,
+        UI_DEFAULT_DISPLAY_DECIMALS,
         BigNumberInBase.ROUND_DOWN
       )
     },
@@ -215,7 +233,7 @@ export default Vue.extend({
       const { balanceWithGasBuffer } = this
 
       return balanceWithGasBuffer.toFormat(
-        UI_DEFAULT_MIN_DISPLAY_DECIMALS,
+        UI_DEFAULT_DISPLAY_DECIMALS,
         BigNumberInBase.ROUND_DOWN
       )
     },
