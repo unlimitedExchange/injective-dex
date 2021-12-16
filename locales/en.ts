@@ -1,7 +1,9 @@
 import faq from './faq/en'
+import dmm from './dmm/en'
 
 export default {
   ...faq,
+  ...dmm,
   address_copied: 'Address Copied',
   copy_address: 'Copy Address',
   max: 'Max',
@@ -525,5 +527,12 @@ export default {
   gas_fee_rebate_note:
     'The rebate is payable in wETH and there is a maximum cap of 0.05 wETH for each rebate. You can only receive this rebate once. If more than one transfer from Ethereum is detected, the first transfer of {amount} USDT or more will be used as the reference.',
   redeem_success:
-    'You have successfully redeemed your gas fees rebate - check your wETH balance!'
+    'You have successfully redeemed your gas fees rebate - check your wETH balance!',
+  auction: {
+    countdown: {
+      title: 'First Injective Burn Countdown',
+      button: 'Watch the Burn'
+    }
+  },
+  terra: 'Terra'
 }

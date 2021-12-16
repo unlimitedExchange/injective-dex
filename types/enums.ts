@@ -38,19 +38,21 @@ export enum Icon {
 }
 
 export enum Modal {
-  Terms = 'terms',
-  OrderConfirm = 'order-confirm',
-  Connect = 'connect',
+  AuctionCountdown = 'auction-countdown',
   BridgeDeposit = 'bridge-deposit',
   BridgeWithdraw = 'bridge-withdraw',
+  Connect = 'connect',
+  Deposit = 'deposit',
+  GasFeeRebate = 'gas-fee-rebate',
+  MarketRewardFactors = 'market-reward-factors',
+  OrderConfirm = 'order-confirm',
   SubaccountDeposit = 'subaccount-deposit',
   SubaccountWithdraw = 'subaccount-withdraw',
-  Transfer = 'transfer',
-  Deposit = 'deposit',
-  Withdraw = 'withdraw',
   TakeOut = 'take-out',
+  Terms = 'terms',
+  Transfer = 'transfer',
   TransferOnChain = 'transfer-on-chain',
-  GasFeeRebate = 'gas-fee-rebate'
+  Withdraw = 'withdraw'
 }
 
 export enum Breakpoint {
@@ -68,10 +70,19 @@ export enum MarketType {
   Futures = 'Futures'
 }
 
+export enum MarketBase {
+  Terra = 'terra'
+}
+
 export enum AppState {
   Busy = 'Busy',
   Loading = 'Loading',
   Idle = 'Idle',
   Error = 'Error',
   Success = 'Success'
+}
+
+export enum DMMType {
+  Ranking = 'Ranking',
+  History = 'History'
 }

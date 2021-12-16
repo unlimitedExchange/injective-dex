@@ -1,7 +1,7 @@
 const modules = require('./modules.config')
 const routes = require('./routes.config')
 const build = require('./build.config')
-const meta = require('./meta.config')
+const head = require('./head.config')
 const pwa = require('./pwa.config')
 
 export default {
@@ -11,7 +11,7 @@ export default {
   /*
    ** Headers of the page
    */
-  head: meta,
+  head,
   /*
    ** Customize the progress-bar color
    */
@@ -92,7 +92,9 @@ export default {
     GAS_FREE_DEPOSIT_REBATE_ENABLED:
       process.env.GAS_FREE_DEPOSIT_REBATE_ENABLED,
     META_TAGS_ENABLED: process.env.META_TAGS_ENABLED,
+    ORDERBOOK_POLLING_ENABLED: process.env.ORDERBOOK_POLLING_ENABLED,
     GEO_IP_RESTRICTIONS_ENABLED: process.env.GEO_IP_RESTRICTIONS_ENABLED,
+    SHOW_AUCTION_COUNTDOWN: process.env.SHOW_AUCTION_COUNTDOWN,
     TRANSFER_RESTRICTIONS_ENABLED: process.env.TRANSFER_RESTRICTIONS_ENABLED,
     MAINTENANCE_ENABLED: process.env.MAINTENANCE_ENABLED,
     APP_FEE_RECIPIENT: process.env.APP_FEE_RECIPIENT,

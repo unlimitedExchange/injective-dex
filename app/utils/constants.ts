@@ -15,6 +15,12 @@ export const TRANSFER_RESTRICTIONS_ENABLED: boolean =
   process.env.TRANSFER_RESTRICTIONS_ENABLED === 'true'
 export const GEO_IP_RESTRICTIONS_ENABLED: boolean =
   process.env.GEO_IP_RESTRICTIONS_ENABLED === 'true'
+export const SHOW_AUCTION_COUNTDOWN: boolean =
+  process.env.SHOW_AUCTION_COUNTDOWN === 'true'
+export const ORDERBOOK_POLLING_ENABLED: boolean =
+  process.env.ORDERBOOK_POLLING_ENABLED === 'true'
+export const ORDERBOOK_STREAMING_ENABLED: boolean =
+  process.env.ORDERBOOK_POLLING_ENABLED !== 'true'
 
 export const ZERO: BigNumber = new BigNumber(0)
 export const ZERO_TO_STRING = '0'
@@ -45,6 +51,7 @@ export const UI_DEFAULT_PRICE_DISPLAY_DECIMALS = 4
 export const UI_DEFAULT_AMOUNT_DISPLAY_DECIMALS = 4
 export const UI_DEFAULT_AGGREGATION_DECIMALS = 3
 export const UI_DEFAULT_AGGREGATION_DECIMALS_STRING = '3'
+export const UI_DEFAULT_DMM_DECIMALS = 2
 
 export const NETWORK: Network = process.env.APP_NETWORK || Network.Testnet
 export const IS_TESTNET = [
@@ -74,6 +81,7 @@ export const INJ_FEE_BUFFER = 0.01
 export const GAS_LIMIT_MULTIPLIER = 1.2
 export const BRIDGE_FEE_IN_USD = 10
 export const INJ_COIN_GECKO_ID = 'injective-protocol'
+export const BITCOIN_GECKO_ID = 'bitcoin'
 
 // eslint-disable-next-line prefer-regex-literals
 export const NUMBER_REGEX = new RegExp(/^-?(0|[1-9]\d*)?(\.\d+)?$/)
@@ -83,3 +91,4 @@ export const PEGGY_GRAPH_URL =
 export const APP_GAS_REBATE_API = process.env.APP_GAS_REBATE_API as string
 export const MIN_AMOUNT_REQUIRED_FOR_GAS_REBATE = 500
 export const MIN_TIMESTAMP_REQUIRED_FOR_GAS_REBATE = 1638313200 // 01 Dec 2020 00:00
+export const DMM_TIME_STAMP_FORMAT: string = "MMM-dd-yyyy HH:mm:ss 'UTC'xxx"

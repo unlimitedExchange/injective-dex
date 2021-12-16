@@ -97,6 +97,10 @@ module.exports = {
         950: '#151821',
         1000: '#16171d',
         1050: '#12141c'
+      },
+
+      blue: {
+        200: '#0082FA'
       }
     },
 
@@ -149,9 +153,18 @@ module.exports = {
         mono: ['Fira Mono', ...defaultTheme.fontFamily.mono]
       },
 
+      borderRadius: {
+        '4xl': '32px'
+      },
+
       opacity: {
         33: '0.33',
         90: '0.9'
+      },
+
+      lineHeight: {
+        3.5: '0.875rem',
+        5.5: '1.375rem'
       },
 
       maxHeight: {
@@ -177,12 +190,14 @@ module.exports = {
       },
 
       minHeight: {
+        4: '1rem',
         ...extraSizings,
         orders: '10rem',
         loading: '4rem'
       },
 
       minWidth: {
+        4: '1rem',
         ...extraSizings
       }
     }
