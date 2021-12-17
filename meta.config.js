@@ -3,16 +3,16 @@ const { BASE_URL } = require('./app/utils/constants')
 const metaTags = {
   title: process.env.APP_NAME
     ? process.env.APP_NAME
-    : 'Injective Exchange - DeFi DEX | Decentralized Derivatives Trading. Any Market. Anytime. Anywhere.',
+    : 'Unlimited Exchange - DeFi DEX | Decentralized Derivatives Trading. Any Market. Anytime. Anywhere.',
   description:
-    'Injective is the first front-running resistant, layer-2 exchange protocol that unlocks the full potential of borderless finance by supporting margin trading, derivatives, and futures.',
+    'Unlimited Exchange, powered by Injective. Injective is the first front-running resistant, layer-2 exchange protocol that unlocks the full potential of borderless finance by supporting margin trading, derivatives, and futures.',
   keywords:
-    'injective protocol, dapp, decentralized app, cryptocurrency, criptocurrency exchange, exchange, exchange token, ethereum, ethereum token, erc20, futures, perpetuals, futures protocol',
-  author: 'InjectiveLabs',
-  url: 'https://injective.exchange',
-  shortName: 'Injective Pro DEX',
-  twitterHandle: '@InjectiveLabs',
-  ogImage: `${BASE_URL}/images/og.jpeg` // Change this to another image (change the name of the file as well to clear cache from social media)
+    'unlimited exchange, injective protocol, dapp, decentralized app, cryptocurrency, criptocurrency exchange, exchange, exchange token, ethereum, ethereum token, erc20, futures, perpetuals, futures protocol',
+  author: 'UnlimitedExchange',
+  url: 'https://unlimited.exchange',
+  shortName: 'Unlimited Exchange',
+  twitterHandle: '@UnlimitedExch',
+  ogImage: `${BASE_URL}/images/og-unlimited.jpeg` // Change this to another image (change the name of the file as well to clear cache from social media)
 }
 
 const nuxtMetaTags = [
@@ -79,8 +79,8 @@ const pwaMetaTags = {
   ogUrl: metaTags.url,
   ogImage: metaTags.ogImage,
   twitterCard: 'summary_large_image',
-  twitterSite: '@InjectiveLabs',
-  twitterCreator: '@InjectiveLabs'
+  twitterSite: '@UnlimitedExch',
+  twitterCreator: '@UnlimitedExch'
 }
 
 const manifestMetaTags = {

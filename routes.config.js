@@ -38,6 +38,8 @@ const mainnetSpot = [
   'atom-usdt',
   'weth-usdt',
   'link-usdt',
+  'axs-usdt',
+  'matic-usdt',
   'ust-usdt',
   'luna-ust',
   'gf-usdt'
